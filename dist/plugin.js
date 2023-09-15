@@ -1,7 +1,7 @@
 exports.version = 0.8
 exports.description = "Starfield effect background"
 exports.apiRequired = 8.1
-exports.repo = ""
+exports.repo = "SanokKule/starfield-background"
 exports.frontend_js = 'main.js'
 exports.config = {
 	star_speed: {
