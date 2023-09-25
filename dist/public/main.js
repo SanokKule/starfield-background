@@ -1,5 +1,5 @@
 {
-const cfg = HFS.getPluginConfig()
+const cfg = HFS.getPluginConfig();
 const canvas = document.getElementById('starfield');
 const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -45,7 +45,7 @@ class Star {
 		this.px;
 		this.py;
 		this.z = Math.random() * 4;
-	}
+	};
 	update() {
 		//stores previous x, y and z and generates new coordinates
 		this.px = this.x;
@@ -62,8 +62,8 @@ class Star {
 				this.px = this.x;
 				this.py = this.y;
 				this.z = 0;
-		}
-	}
+			};
+	};
 	show() {
 		//draws line from x,y to px,py
 		c.lineWidth = this.z * 0.6;
@@ -71,11 +71,11 @@ class Star {
 		c.moveTo(this.x, this.y);
 		c.lineTo(this.px, this.py);
 		c.stroke();
-	}
+	};
 }
 
 let stars = [];
-let starsAmount = Math.random() * (cfg.max_stars ? cfg.max_stars : 500) ;
+let starsAmount = Math.random() * (cfg.max_stars ? cfg.max_stars : 500);
 for (let i = 0; i < starsAmount; i++) stars.push(new Star());
 
 draw();

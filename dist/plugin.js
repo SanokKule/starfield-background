@@ -1,4 +1,4 @@
-exports.version = 0.8
+exports.version = 0.9
 exports.description = "Starfield effect background"
 exports.apiRequired = 8.1
 exports.repo = "SanokKule/starfield-background"
@@ -25,4 +25,7 @@ exports.config = {
 		max: 360,
 		placeholder: 'default: 60'
 	}
+}
+exports.configDialog = {
+    sx: { maxWidth: '26em' }
 }
