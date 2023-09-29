@@ -7,8 +7,8 @@ canvas.height = window.innerHeight;
 c.fillStyle = 'rgba(0, 0, 0, 0.5)';
 c.strokeStyle = 'rgb(255, 255, 255)';
 c.translate(canvas.width / 2, canvas.height / 2);
-let speed = cfg.star_speed ? cfg.star_speed : 0.025;
-let fps = cfg.max_framerate ? cfg.max_framerate : 60;
+let speed = cfg.star_speed || 0.025;
+let fps = cfg.max_framerate || 60;
 let lastDraw = Date.now();
 
 document.body.setAttribute('onresize', 'starfieldResize()');
@@ -75,7 +75,7 @@ class Star {
 }
 
 let stars = [];
-let starsAmount = Math.random() * (cfg.max_stars ? cfg.max_stars : 500);
+let starsAmount = Math.random() * (cfg.max_stars || 500);
 for (let i = 0; i < starsAmount; i++) stars.push(new Star());
 
 draw();
