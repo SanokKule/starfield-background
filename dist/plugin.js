@@ -1,4 +1,4 @@
-exports.version = 0.9
+exports.version = 0.10
 exports.description = "Starfield effect background"
 exports.apiRequired = 8.1
 exports.repo = "SanokKule/starfield-background"
@@ -16,7 +16,14 @@ exports.config = {
 		type: 'number',
 		min: 0,
 		max: 5000,
-		placeholder: 'default: 500'
+		placeholder: 'default: 256'
+	},
+	min_stars: {
+		frontend: true,
+		type: 'number',
+		min: 0,
+		max: 5000,
+		placeholder: 'default: 64'
 	},
 	max_framerate: {
 		frontend: true,

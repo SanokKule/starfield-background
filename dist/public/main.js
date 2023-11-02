@@ -10,6 +10,14 @@ c.translate(canvas.width / 2, canvas.height / 2);
 let speed = cfg.star_speed || 0.025;
 let fps = cfg.max_framerate || 60;
 let lastDraw = Date.now();
+let starsMax = cfg.max_stars || 256
+let starsMin = cfg.min_stars || 64
+
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min) + min);
+}
 
 document.body.setAttribute('onresize', 'starfieldResize()');
 
@@ -75,8 +83,10 @@ class Star {
 }
 
 let stars = [];
-let starsAmount = Math.random() * (cfg.max_stars || 500);
-for (let i = 0; i < starsAmount; i++) stars.push(new Star());
+let starsAmount = getRandomInt(starsMin, starsMax);
+for (let i = 0; i < starsAmount; i++) {
+	stars.push(new Star())
+};
 
 draw();
 }
