@@ -1,50 +1,58 @@
 {
-const cfg = HFS.getPluginConfig();
 const canvas = document.getElementById('starfield');
 const c = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-c.fillStyle = 'rgba(0, 0, 0, 0.5)';
-c.strokeStyle = 'rgb(255, 255, 255)';
-c.translate(canvas.width / 2, canvas.height / 2);
+let lastDraw = Date.now();
+let stars = [];
+let starsAmount = getRandomInt(starsMin, starsMax);
+
+document.body.setAttribute('onresize', 'starfieldResize()');
+document.body.style.background = 'black';
+
+const cfg = HFS.getPluginConfig();
 let speed = cfg.star_speed || 0.025;
 let fps = cfg.max_framerate || 60;
-let lastDraw = Date.now();
-let starsMax = cfg.max_stars || 256
-let starsMin = cfg.min_stars || 64
+let starsMax = cfg.max_stars || 256;
+let starsMin = cfg.min_stars || 64;
+
+if (starsMin >= starsMax) (starsMin = starsMax);
 
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min) + min);
-}
-
-document.body.setAttribute('onresize', 'starfieldResize()');
-
-function starfieldResize() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-	c.fillStyle = 'rgba(0, 0, 0, 0.5)';
-	c.strokeStyle = 'rgb(255, 255, 255)';
-	c.translate(canvas.width / 2, canvas.height / 2);
-	draw();
-}
+};
 
 function draw() {
 	var frametime = 1000 / fps;
 	var now = Date.now();
 	var diff = now - lastDraw;
 	if (diff >= frametime) {
-		//create rectangle
-		c.fillRect(-canvas.width/2, -canvas.height / 2, canvas.width, canvas.height);
+		c.fillRect(
+			-canvas.width / 2,
+			-canvas.height / 2,
+			canvas.width,
+			canvas.height
+		);
 		for (let s of stars) {
 			s.update();
 			s.show();
-		}
+		};
 		lastDraw = now - (diff % frametime);
 	}
 	requestAnimationFrame(draw);
-}
+};
+
+function starfieldResize() {
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+	c.fillStyle = 'rgba(0, 0, 0, 0.5)';
+	c.strokeStyle = 'rgb(255, 255, 255)';
+	c.translate(
+		canvas.width / 2,
+		canvas.height / 2
+	);
+	draw();
+};
 
 class Star {
 	constructor() {
@@ -55,7 +63,6 @@ class Star {
 		this.z = Math.random() * 4;
 	};
 	update() {
-		//stores previous x, y and z and generates new coordinates
 		this.px = this.x;
 		this.py = this.y;
 		this.z += speed;
@@ -73,20 +80,14 @@ class Star {
 			};
 	};
 	show() {
-		//draws line from x,y to px,py
 		c.lineWidth = this.z * 0.6;
 		c.beginPath();
 		c.moveTo(this.x, this.y);
 		c.lineTo(this.px, this.py);
 		c.stroke();
 	};
-}
-
-let stars = [];
-let starsAmount = getRandomInt(starsMin, starsMax);
-for (let i = 0; i < starsAmount; i++) {
-	stars.push(new Star())
 };
 
-draw();
+for (let i = 0; i < starsAmount; i++) { stars.push(new Star()) };
+starfieldResize();
 }

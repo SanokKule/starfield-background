@@ -1,4 +1,4 @@
-exports.version = 0.10
+exports.version = 1.0
 exports.description = "Starfield effect background"
 exports.apiRequired = 8.1
 exports.repo = "SanokKule/starfield-background"
