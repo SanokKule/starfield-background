@@ -3,7 +3,6 @@ const canvas = document.getElementById('starfield');
 const c = canvas.getContext('2d');
 let lastDraw = Date.now();
 let stars = [];
-let starsAmount = getRandomInt(starsMin, starsMax);
 
 document.body.setAttribute('onresize', 'starfieldResize()');
 document.body.style.background = 'black';
@@ -15,6 +14,7 @@ let starsMax = cfg.max_stars || 256;
 let starsMin = cfg.min_stars || 64;
 
 if (starsMin >= starsMax) (starsMin = starsMax);
+let starsAmount = getRandomInt(starsMin, starsMax);
 
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
