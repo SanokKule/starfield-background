@@ -1,5 +1,15 @@
 {
+// https://github.com/Ashikpaul/Starfield-effect
+
+var canv = document.createElement("canvas");
+canv.setAttribute("id", "starfield");
+document.body.insertBefore(canv, document.body.firstChild);
+
 const canvas = document.getElementById('starfield');
+canvas.style.position = 'fixed'
+canvas.style.zIndex = -1
+canvas.style.overflow = 'hidden'
+
 const c = canvas.getContext('2d');
 let lastDraw = Date.now();
 let stars = [];
@@ -33,9 +43,9 @@ function draw() {
 			canvas.width,
 			canvas.height
 		);
-		for (let s of stars) {
-			s.update();
-			s.show();
+		for (let star of stars) {
+			star.update();
+			star.show();
 		};
 		lastDraw = now - (diff % frametime);
 	}
